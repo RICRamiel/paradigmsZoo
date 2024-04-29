@@ -244,7 +244,7 @@ class Zoo {
                                   "Add worker - add new worker to your zoo\nAdd animal - add new animal to your zoo\nAdd visitor - add new visitor to your zoo\n" +
                                   "Delete worker - fire up worker from your zoo\nDelete animal - transfer animal from your zoo\nDelete visitor - kick visitor from your zoo\n" +
                                   "Edit worker - edit worker's stats\nEdit animal - edit animal's stats\nEdit visitor - edit visitor's stats\n" +
-                                  "Attach Animal - attach animal to certain worker");
+                                  "Attach Animal - attach animal to certain worker\n");
                     break;
                 case "Check workers":
                     checkOutWorkers();
@@ -281,6 +281,16 @@ class Zoo {
                 case "Attach Animal":
                     attachAnimal();
                     break;
+                case "Delete worker":
+                    deleteWorker();
+                    break;
+                case "Delete animal":
+                    deleteAnimal();
+                    break;
+                case "Delete visitor":
+                    deleteVisitor();
+                    break;
+                    
             }
         }
     }
