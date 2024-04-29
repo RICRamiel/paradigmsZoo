@@ -9,6 +9,6 @@ class Lion : Animal {
     }
 
     public override void sound() {
-        Console.Write("Rawr");
+        Console.Write("Rawr\n");
     }
 }

@@ -9,6 +9,6 @@ class Otter : Animal {
     }
 
     public override void sound() {
-        Console.Write("Que Que Que");
+        Console.Write("Que Que Que\n");
     }
 }

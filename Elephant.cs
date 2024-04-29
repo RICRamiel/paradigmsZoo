@@ -9,6 +9,6 @@ class Elephant : Animal {
     }
 
     public override void sound() {
-        Console.Write("Whooo");
+        Console.Write("Whooo\n");
     }
 }

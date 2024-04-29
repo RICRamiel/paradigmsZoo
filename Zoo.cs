@@ -55,6 +55,7 @@ class Zoo {
             foreach (var work in unit.AttachedAnimal) {
                 temp += $"{work}, ";
             }
+
             Console.Write(
                 $"________________\nName: {unit.Name}\nSex: {unit.Sex}\nJob: {unit.Job}\nAttachedAnimal: {temp}\n");
         }
@@ -73,6 +74,7 @@ class Zoo {
             foreach (var unit in Workers[i].AttachedAnimal) {
                 temp += $"{unit}, ";
             }
+
             Console.Write(
                 $"________________\n{i}\nName: {Workers[i].Name}\nSex: {Workers[i].Sex}\nJob:{Workers[i].Job}\nAttachedAnimal:{temp}\n");
         }
@@ -93,6 +95,7 @@ class Zoo {
             foreach (var unit in Workers[i].AttachedAnimal) {
                 temp += $"{unit}, ";
             }
+
             Console.Write(
                 $"________________\n{i}\nName: {Workers[i].Name}\nSex: {Workers[i].Sex}\nJob:{Workers[i].Job}\nAttachedAnimal:{temp}\n");
         }
@@ -233,6 +236,16 @@ class Zoo {
         Workers[toAttachWork].AttachedAnimal.Add(toAttachAnim);
     }
 
+    public void makeSound() {
+        Console.Write("Choose animal to make Sound\n");
+        for (int i = 0; i < Animals.Count; i++) {
+            Console.Write(
+                $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");
+        }
+        var toMakeSound = Int32.Parse(Console.ReadLine());
+        Animals[toMakeSound].sound();
+    }
+
     public void driver() {
         Console.Write("Type <Help> to check available commands\n");
         while (isRunning) {
@@ -290,7 +303,9 @@ class Zoo {
                 case "Delete visitor":
                     deleteVisitor();
                     break;
-                    
+                case "Make Sound":
+                    makeSound();
+                    break;
             }
         }
     }
