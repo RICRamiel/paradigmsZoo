@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 abstract class Animal {
@@ -64,23 +65,49 @@ abstract class Animal {
         SaturationThreshold = Int32.Parse(newThings[2]);
     }
 
-    public static void addAnimal(Zoo zoo, string Type) {
-        List<Animal> Animals = zoo.getAnimals();
-        switch (Type) {
-            case "Lion":
-                Animals.Add(new Lion());
+
+    public static void addAnimal(Zoo zoo) {
+        List<aviary> Aviaries = zoo.getAviaries();
+        Console.Write(
+            $"Choose animal type\nId:{(int)types.Lion} {types.Lion.ToString()}\nId:{(int)types.Elephant} {types.Elephant.ToString()}\nId:{(int)types.Otter} {types.Otter.ToString()}");
+        var type = Int32.Parse(Console.ReadLine());
+        int aviaryTo = 0;
+        bool flag = false;
+        Console.Write("Choose Aviary to add\n");
+        for (var unit = 0; unit < Aviaries.Count; unit++) {
+            if ((Aviaries[unit].getAnimals().Count < Aviaries[unit].getAnimalMax() &&
+                 Aviaries[unit].getAnimals()[0].Type.Equals(type)) || Aviaries[unit].getAnimals().Count == 0) {
+                Console.Write($"\nId:{unit}\n");
+                Aviaries[unit].getInfo();
+                aviaryTo = Int32.Parse(Console.ReadLine());
+                flag = true;
                 break;
-            case "Otter":
-                Animals.Add(new Otter());
+            }
+        }
+
+        if (!flag) {
+            Console.Write("There is no suitable aviaries. So creating a new one");
+            aviary.addAviary(zoo);
+            aviaryTo = Aviaries.Count - 1;
+        }
+
+        switch (type) {
+            case (int)types.Lion:
+                Aviaries[aviaryTo].getAnimals().Add(new Lion());
                 break;
-            case "Elephant":
-                Animals.Add(new Elephant());
+            case (int)types.Otter:
+                Aviaries[aviaryTo].getAnimals().Add(new Otter());
+                break;
+            case (int)types.Elephant:
+                Aviaries[aviaryTo].getAnimals().Add(new Elephant());
                 break;
         }
     }
 
     public static void deleteAnimal(Zoo zoo) {
-        List<Animal> Animals = zoo.getAnimals();
+        var chosenAv = zoo.chooseAviary();
+        aviary Aviary = zoo.getAviaries()[chosenAv];
+        List<Animal> Animals = Aviary.getAnimals();
         for (int i = 0; i < Animals.Count; i++) {
             Console.Write(
                 $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");
@@ -95,8 +122,14 @@ abstract class Animal {
         Animals.RemoveAt(toDel);
     }
 
+    public int getSaturation() {
+        return SaturationLevel;
+    }
+
     public static void editAnimal(Zoo zoo) {
-        List<Animal> Animals = zoo.getAnimals();
+        var chosenAv = zoo.chooseAviary();
+        aviary Aviary = zoo.getAviaries()[chosenAv];
+        List<Animal> Animals = Aviary.getAnimals();
         for (int i = 0; i < Animals.Count; i++) {
             Console.Write(
                 $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");

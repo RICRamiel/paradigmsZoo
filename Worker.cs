@@ -29,7 +29,7 @@ class Worker : Person {
         Console.Write("Choose Worker to edit\n");
         for (int i = 0; i < Workers.Count; i++) {
             string temp = "";
-            foreach (var unit in Workers[i].AttachedAnimal) {
+            foreach (var unit in Workers[i].AttachedAviary) {
                 temp += $"{unit}, ";
             }
 

@@ -27,7 +27,7 @@ namespace paradigm {
                         zoo.checkOutWorkers();
                         break;
                     case "Check animals":
-                        zoo.checkOutAnimals();
+                        zoo.getAviariesInfo();
                         break;
                     case "Check visitors":
                         zoo.checkOutVisitors();
@@ -37,9 +37,7 @@ namespace paradigm {
                         Worker.addWorker(zoo);
                         break;
                     case "Add animal":
-                        Console.Write("Enter type of animal to add(Lion,Elephant,Otter)\n");
-                        string type = Console.ReadLine();
-                        Animal.addAnimal(zoo, type);
+                        Animal.addAnimal(zoo);
                         break;
                     case "Add visitor":
                         Console.Write("Please, enter Name and Sex with space separator");
@@ -70,8 +68,7 @@ namespace paradigm {
                         Visitor.deleteVisitor(zoo);
                         break;
                     case "Make Sound":
-                        Console.Write("Choose animal to make Sound\n");
-                        zoo.makeSound();
+                        zoo.animalToSound();
                         break;
                     case "Pause Zoo":
                         zoo.pauseZoo(updaterThread);

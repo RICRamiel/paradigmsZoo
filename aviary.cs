@@ -2,16 +2,34 @@ using System;
 using System.Collections.Generic;
 
 class aviary {
-    private List<Animal> Animals = new List<Animal>();;
+    private List<Animal> Animals = new List<Animal>();
     private int Food { get; set; }
 
     private int AnimalMax = 5;
 
+    public aviary() {
+        Food = 100;
+    }
+
+    public int getAnimalMax() {
+        return AnimalMax;
+    }
+
+    public static void addAviary(Zoo zoo) {
+        List<aviary> Aviaries = zoo.getAviaries();
+        Aviaries.Add(new aviary());
+    }
+
     public void checkOutAnimals() {
-        foreach (var unit in Animals) {
+        for (var unit = 0; unit < Animals.Count; unit++) {
             Console.Write(
-                $"________________\nStatus: {unit.Status}\nType: {unit.Type}\nLevel: {unit.SaturationLevel}\n");
+                $"\nId:{unit}\nStatus: {Animals[unit].getStatus()}\nType: {Animals[unit].GetType()}\nLevel: {Animals[unit].getSaturation()}\n");
         }
+    }
+
+    public void getInfo() {
+        Console.Write($"______________\nFood:{Food}");
+        checkOutAnimals();
     }
 
     public List<Animal> getAnimals() {
@@ -29,10 +47,11 @@ class aviary {
             }
         }
     }
+
     public void makeSound() {
-        for (int i = 0; i < Animals.Count; i++) {
+        for (var unit = 0; unit < Animals.Count; unit++) {
             Console.Write(
-                $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");
+                $"\nId:{unit}\nStatus: {Animals[unit].getStatus()}\nType: {Animals[unit].GetType()}\nLevel: {Animals[unit].getSaturation()}\n");
         }
 
         var toMakeSound = Int32.Parse(Console.ReadLine());
