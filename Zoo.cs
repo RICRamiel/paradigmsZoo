@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
+
 class Zoo {
     public string Name { get; set; }
     private int Timer { get; set; }
@@ -9,23 +10,29 @@ class Zoo {
 
     private static List<Worker> Workers = new List<Worker>();
     private static List<Visitor> Visitors = new List<Visitor>();
-    private static List<Animal> Animals = new List<Animal>();
+    private static List<aviary> Aviaries = new List<aviary>();
 
     public Zoo(string name) {
         Name = name;
         Timer = 0;
     }
 
+    private void startUp() {
+    }
+
     public void updateTick() {
         while (isRunning) {
             Timer += 1;
-            foreach (var unit in Animals) {
-                unit.SaturationDown();
-                unit.statusUpdate();
+            foreach (var aviar in Aviaries) {
+                foreach (var ani in aviar.getAnimals()) {
+                    ani.SaturationDown();
+                    ani.tickMove();
+                    ani.statusUpdate();
+                }
             }
 
-            foreach (var unit in Workers) {
-                unit.feedAttachedAnimal(Animals);
+            foreach (var unit in Aviaries) {
+                unit.feedAnimals();
             }
 
             Thread.Sleep(5000);
@@ -34,6 +41,15 @@ class Zoo {
 
     public bool isRunnin() {
         return isRunning;
+    }
+
+
+    public void pauseZoo(Thread thread) {
+        thread.Suspend();
+    }
+
+    public void resumeZoo(Thread thread) {
+        thread.Resume();
     }
 
     public void stopZoo() {
@@ -52,12 +68,12 @@ class Zoo {
     public void checkOutWorkers() {
         foreach (var unit in Workers) {
             string temp = "";
-            foreach (var work in unit.AttachedAnimal) {
+            foreach (var work in unit.AttachedAviary) {
                 temp += $"{work}, ";
             }
 
             Console.Write(
-                $"________________\nName: {unit.Name}\nSex: {unit.Sex}\nJob: {unit.Job}\nAttachedAnimal: {temp}\n");
+                $"________________\nName: {unit.Name}\nSex: {unit.Sex}\nJob: {unit.Job}\nAttachedAviary: {temp}\n");
         }
     }
 
@@ -68,16 +84,7 @@ class Zoo {
     }
 
 
-    public void checkOutAnimals() {
-        foreach (var unit in Animals) {
-            Console.Write(
-                $"________________\nStatus: {unit.Status}\nType: {unit.Type}\nLevel: {unit.SaturationLevel}\n");
-        }
-    }
-
-    public List<Animal> getAnimals() {
-        return Animals;
-    }
+ 
 
     public List<Worker> getWorkers() {
         return Workers;
@@ -86,14 +93,6 @@ class Zoo {
     public List<Visitor> getVisitors() {
         return Visitors;
     }
-    
-    public void makeSound() {
-        for (int i = 0; i < Animals.Count; i++) {
-            Console.Write(
-                $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");
-        }
 
-        var toMakeSound = Int32.Parse(Console.ReadLine());
-        Animals[toMakeSound].sound();
-    }
+    
 }

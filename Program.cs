@@ -15,12 +15,13 @@ namespace paradigm {
                 string command = Console.ReadLine();
                 switch (command) {
                     case "Help":
-                        Console.Write("\nStop Zoo - to stop running game\n" +
-                                      "Check workers - show list of workers and their stats\nCheck animals - show list of animals and their stats\nCheck visitors - show list of visitors and their stats\n" +
-                                      "Add worker - add new worker to your zoo\nAdd animal - add new animal to your zoo\nAdd visitor - add new visitor to your zoo\n" +
-                                      "Delete worker - fire up worker from your zoo\nDelete animal - transfer animal from your zoo\nDelete visitor - kick visitor from your zoo\n" +
-                                      "Edit worker - edit worker's stats\nEdit animal - edit animal's stats\nEdit visitor - edit visitor's stats\n" +
-                                      "Attach Animal - attach animal to certain worker\nMake Sound - ");
+                        Console.Write(
+                            "\nStop Zoo - to stop running game\nPause Zoo - to pause your zoo\nResume Zoo - to resume your zoo\n" +
+                            "Check workers - show list of workers and their stats\nCheck animals - show list of animals and their stats\nCheck visitors - show list of visitors and their stats\n" +
+                            "Add worker - add new worker to your zoo\nAdd animal - add new animal to your zoo\nAdd visitor - add new visitor to your zoo\n" +
+                            "Delete worker - fire up worker from your zoo\nDelete animal - transfer animal from your zoo\nDelete visitor - kick visitor from your zoo\n" +
+                            "Edit worker - edit worker's stats\nEdit animal - edit animal's stats\nEdit visitor - edit visitor's stats\n" +
+                            "Make Sound - ");
                         break;
                     case "Check workers":
                         zoo.checkOutWorkers();
@@ -58,9 +59,6 @@ namespace paradigm {
                         Console.Write("Are you sure? Write YES or NO\n");
                         zoo.stopZoo();
                         break;
-                    case "Attach Animal":
-                        Animal.attachAnimal(zoo);
-                        break;
                     case "Delete worker":
                         Worker.deleteWorker(zoo);
                         break;
@@ -75,8 +73,20 @@ namespace paradigm {
                         Console.Write("Choose animal to make Sound\n");
                         zoo.makeSound();
                         break;
+                    case "Pause Zoo":
+                        zoo.pauseZoo(updaterThread);
+                        Console.Write("\nZoo Paused\n");
+                        break;
+                    case "Resume Zoo":
+                        zoo.resumeZoo(updaterThread);
+                        Console.Write("\nZoo Resumed\n");
+                        break;
                 }
+                
+                    
             }
+
+            updaterThread.Join();
         }
     }
 }

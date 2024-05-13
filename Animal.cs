@@ -1,11 +1,30 @@
 using System;
 using System.Collections.Generic;
 
+
 abstract class Animal {
-    public string Status { get; set; }
-    public string Type { get; set; }
+    public enum status {
+        Hungry,
+        Satisfied
+    }
+
+    public enum whereIsAnimal {
+        Visible,
+        NonVisible
+    }
+
+    public enum types {
+        Lion,
+        Elephant,
+        Otter
+    }
+
+    public status Status { get; set; }
+    public types Type { get; set; }
+    public whereIsAnimal Visibility { get; set; }
     public int SaturationLevel { get; set; }
     public int SaturationThreshold { get; set; }
+
 
     public abstract void sound();
 
@@ -15,18 +34,32 @@ abstract class Animal {
 
     public void statusUpdate() {
         if (SaturationLevel > SaturationThreshold) {
-            Status = "Satisfied";
+            Status = status.Satisfied;
         }
         else if (SaturationLevel > 0) {
-            Status = "Hungry";
+            Status = status.Hungry;
         }
     }
 
+    public status getStatus() {
+        return Status;
+    }
+
+    public whereIsAnimal getVisibility() {
+        return Visibility;
+    }
+
+    public void tickMove() {
+        Random random = new Random();
+        Array val = Enum.GetValues(typeof(whereIsAnimal));
+        Visibility = (whereIsAnimal)val.GetValue(random.Next(val.Length));
+    }
+
+
     public void edit() {
         Console.Write(
-            "Please Enter new Status (Satisfied,Hungry), Saturation(1 - 100), SaturationThreshold(1 - 100) with spaces between\n");
+            "Please Enter new Saturation(1 - 100), SaturationThreshold(1 - 100) with spaces between\n");
         string[] newThings = Console.ReadLine().Split(' ');
-        Status = newThings[0];
         SaturationLevel = Int32.Parse(newThings[1]);
         SaturationThreshold = Int32.Parse(newThings[2]);
     }
@@ -79,34 +112,38 @@ abstract class Animal {
         Animals[toEdit].statusUpdate();
     }
 
-    public static void attachAnimal(Zoo zoo) {
-        List<Animal> Animals = zoo.getAnimals();
-        List<Worker> Workers = zoo.getWorkers();
-        Console.Write("Choose animal to attach\n");
-        for (int i = 0; i < Animals.Count; i++) {
-            Console.Write(
-                $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");
-        }
-
-        var toAttachAnim = Int32.Parse(Console.ReadLine());
-
-        Console.Write("Choose worker to attach animal to\n");
-        if (Workers.Count == 0) {
-            Console.Write("There arenot any workers\n");
-            return;
-        }
-
-        for (int i = 0; i < Workers.Count; i++) {
-            string temp = "";
-            foreach (var unit in Workers[i].AttachedAnimal) {
-                temp += $"{unit}, ";
-            }
-
-            Console.Write(
-                $"________________\n{i}\nName: {Workers[i].Name}\nSex: {Workers[i].Sex}\nJob:{Workers[i].Job}\nAttachedAnimal:{temp}\n");
-        }
-
-        var toAttachWork = Int32.Parse(Console.ReadLine());
-        Workers[toAttachWork].AttachedAnimal.Add(toAttachAnim);
+    public void feed() {
+        SaturationLevel = 100;
     }
+
+    // public static void attachAnimal(Zoo zoo) {
+    //     List<Animal> Animals = zoo.getAnimals();
+    //     List<Worker> Workers = zoo.getWorkers();
+    //     Console.Write("Choose animal to attach\n");
+    //     for (int i = 0; i < Animals.Count; i++) {
+    //         Console.Write(
+    //             $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");
+    //     }
+    //
+    //     var toAttachAnim = Int32.Parse(Console.ReadLine());
+    //
+    //     Console.Write("Choose worker to attach animal to\n");
+    //     if (Workers.Count == 0) {
+    //         Console.Write("There arenot any workers\n");
+    //         return;
+    //     }
+    //
+    //     for (int i = 0; i < Workers.Count; i++) {
+    //         string temp = "";
+    //         foreach (var unit in Workers[i].AttachedAnimal) {
+    //             temp += $"{unit}, ";
+    //         }
+    //
+    //         Console.Write(
+    //             $"________________\n{i}\nName: {Workers[i].Name}\nSex: {Workers[i].Sex}\nJob:{Workers[i].Job}\nAttachedAnimal:{temp}\n");
+    //     }
+    //
+    //     var toAttachWork = Int32.Parse(Console.ReadLine());
+    //     Workers[toAttachWork].AttachedAnimal.Add(toAttachAnim);
+    // }
 }

@@ -3,23 +3,15 @@ using System.Collections.Generic;
 
 class Worker : Person {
     public string Job { get; set; }
-    public List<int> AttachedAnimal { get; set; }
+    public List<int> AttachedAviary { get; set; }
 
     public Worker(string name, string sex, string job) {
         Name = name;
         Sex = sex;
         Job = job;
-        AttachedAnimal = new List<int>();
+        AttachedAviary = new List<int>();
     }
-    public void feedAttachedAnimal(List<Animal> animals) {
-        foreach (var index in AttachedAnimal) {
-            if (animals[index].Status == "Hungry") {
-                animals[index].SaturationLevel = 100;
-                animals[index].statusUpdate();
-                break;
-            }
-        }
-    }
+    
     public void edit() {
         Console.Write("Please, enter new Name, Sex, Job with space separator\n");
         string[] newThings = Console.ReadLine().Split(' ');
@@ -58,7 +50,7 @@ class Worker : Person {
         Console.Write("Choose Worker to delete\n");
         for (int i = 0; i < Workers.Count; i++) {
             string temp = "";
-            foreach (var unit in Workers[i].AttachedAnimal) {
+            foreach (var unit in Workers[i].AttachedAviary) {
                 temp += $"{unit}, ";
             }
 

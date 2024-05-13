@@ -2,10 +2,10 @@ using System;
 
 class Elephant : Animal {
     public Elephant() {
-        Type = "Elephant";
+        Type = types.Elephant;
         SaturationLevel = 100;
         SaturationThreshold = 40;
-        Status = "Satisfied";
+        Status = status.Satisfied;
     }
 
     public override void sound() {
