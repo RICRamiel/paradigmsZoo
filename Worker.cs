@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class Worker : Person {
     public string Job { get; set; }
@@ -11,7 +12,7 @@ class Worker : Person {
         Job = job;
         AttachedAviary = new List<int>();
     }
-    
+
     public void edit() {
         Console.Write("Please, enter new Name, Sex, Job with space separator\n");
         string[] newThings = Console.ReadLine().Split(' ');
@@ -19,11 +20,13 @@ class Worker : Person {
         Sex = newThings[1];
         Job = newThings[2];
     }
+
     public static void addWorker(Zoo zoo) {
         List<Worker> Workers = zoo.getWorkers();
         string[] temp = Console.ReadLine().Split(' ');
         Workers.Add(new Worker(temp[0], temp[1], temp[2]));
     }
+
     public static void editWorker(Zoo zoo) {
         List<Worker> Workers = zoo.getWorkers();
         Console.Write("Choose Worker to edit\n");
@@ -45,6 +48,7 @@ class Worker : Person {
 
         Workers[toEdit].edit();
     }
+
     public static void deleteWorker(Zoo zoo) {
         List<Worker> Workers = zoo.getWorkers();
         Console.Write("Choose Worker to delete\n");
@@ -66,4 +70,23 @@ class Worker : Person {
 
         Workers.RemoveAt(toDel);
     }
+
+    public static void attachAviaries(Zoo zoo) {
+        List<Worker> Workers = zoo.getWorkers();
+        List<aviary> Aviaries = zoo.getAviaries();
+        foreach (var unit in Workers) {
+            unit.AttachedAviary.Clear();
+        }
+        if (Workers.Count == 0) {
+            Console.Write("Firstly, add worker");
+            return;
+        }
+        Random random = new Random();
+        for (var unit = 0; unit < Aviaries.Count; unit++) {
+            int indexOfWorkerToAttach = random.Next(Workers.Count);
+            Workers[indexOfWorkerToAttach].AttachedAviary.Add(unit);
+        }
+    }
+
+    
 }

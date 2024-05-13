@@ -21,12 +21,12 @@ class Zoo {
     private void startUp() {
         Random random = new Random();
         for (var count = 0; count < 15; count++) {
-            var type = random.Next(2);
+            var type = random.Next(3);
             bool flag = false;
             int aviaryTo = 0;
             for (var unit = 0; unit < Aviaries.Count; unit++) {
                 if ((Aviaries[unit].getAnimals().Count < Aviaries[unit].getAnimalMax() &&
-                     Aviaries[unit].getAnimals()[0].Type.Equals(type)) || Aviaries[unit].getAnimals().Count == 0) {
+                     (int)Aviaries[unit].getAnimals()[0].Type == type) || Aviaries[unit].getAnimals().Count == 0) {
                     aviaryTo = unit;
                     flag = true;
                     break;
@@ -34,7 +34,6 @@ class Zoo {
             }
 
             if (!flag) {
-                Console.Write("There is no suitable aviaries. So creating a new one");
                 aviary.addAviary(this);
                 aviaryTo = Aviaries.Count - 1;
             }
@@ -51,10 +50,12 @@ class Zoo {
                     break;
             }
         }
+
+        Console.Write("Please create worker and attach aviaries to him\n");
     }
 
     public int chooseAviary() {
-        Console.Write("Please choose Aviary");
+        Console.Write("Please choose Aviary\n");
         getAviariesInfo();
         var chosen = Int32.Parse(Console.ReadLine());
         return chosen;
@@ -62,6 +63,7 @@ class Zoo {
 
     public void getAviariesInfo() {
         for (var unit = 0; unit < Aviaries.Count; unit++) {
+            Console.Write($"____________________\nId:{unit}\n");
             Aviaries[unit].getInfo();
         }
     }
@@ -77,11 +79,27 @@ class Zoo {
                 }
             }
 
+            foreach (var visit in Visitors) {
+                visit.buySnack();
+                visit.feedAnimal(this);
+            }
+
             foreach (var unit in Aviaries) {
                 unit.feedAnimals();
             }
 
+            fillAviary();
             Thread.Sleep(5000);
+        }
+    }
+
+    public void fillAviary() {
+        foreach (var unit in Workers) {
+            foreach (var index in unit.AttachedAviary) {
+                if (Aviaries[index].getFood() <= Aviaries[index].getAnimals().Count) {
+                    Aviaries[index].addFood(10);
+                }
+            }
         }
     }
 

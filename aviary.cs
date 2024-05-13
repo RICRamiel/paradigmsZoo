@@ -28,7 +28,7 @@ class aviary {
     }
 
     public void getInfo() {
-        Console.Write($"______________\nFood:{Food}");
+        Console.Write($"Food:{Food}\n");
         checkOutAnimals();
     }
 
@@ -40,9 +40,13 @@ class aviary {
         return Food;
     }
 
+    public void addFood(int amount) {
+        Food += amount;
+    }
+
     public void feedAnimals() {
         foreach (var unit in Animals) {
-            if (unit.getStatus() == Animal.status.Hungry) {
+            if (unit.getStatus() == Animal.status.Hungry && Food > 0) {
                 unit.feed();
             }
         }

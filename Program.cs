@@ -21,7 +21,7 @@ namespace paradigm {
                             "Add worker - add new worker to your zoo\nAdd animal - add new animal to your zoo\nAdd visitor - add new visitor to your zoo\n" +
                             "Delete worker - fire up worker from your zoo\nDelete animal - transfer animal from your zoo\nDelete visitor - kick visitor from your zoo\n" +
                             "Edit worker - edit worker's stats\nEdit animal - edit animal's stats\nEdit visitor - edit visitor's stats\n" +
-                            "Make Sound - ");
+                            "Make Sound\nAttach aviaries\n");
                         break;
                     case "Check workers":
                         zoo.checkOutWorkers();
@@ -40,7 +40,7 @@ namespace paradigm {
                         Animal.addAnimal(zoo);
                         break;
                     case "Add visitor":
-                        Console.Write("Please, enter Name and Sex with space separator");
+                        Console.Write("Please, enter Name and Sex and Money amount with space separator");
                         Visitor.addVisitor(zoo);
                         break;
                     case "Edit worker":
@@ -78,9 +78,10 @@ namespace paradigm {
                         zoo.resumeZoo(updaterThread);
                         Console.Write("\nZoo Resumed\n");
                         break;
+                    case "Attach aviaries":
+                        Worker.attachAviaries(zoo);
+                        break;
                 }
-                
-                    
             }
 
             updaterThread.Join();

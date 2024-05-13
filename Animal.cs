@@ -75,8 +75,9 @@ abstract class Animal {
         bool flag = false;
         Console.Write("Choose Aviary to add\n");
         for (var unit = 0; unit < Aviaries.Count; unit++) {
-            if ((Aviaries[unit].getAnimals().Count < Aviaries[unit].getAnimalMax() &&
-                 Aviaries[unit].getAnimals()[0].Type.Equals(type)) || Aviaries[unit].getAnimals().Count == 0) {
+            if (Aviaries[unit].getAnimals().Count == 0 ||
+                (Aviaries[unit].getAnimals().Count < Aviaries[unit].getAnimalMax() &&
+                 (int)Aviaries[unit].getAnimals()[0].Type == type)) {
                 Console.Write($"\nId:{unit}\n");
                 Aviaries[unit].getInfo();
                 aviaryTo = Int32.Parse(Console.ReadLine());
@@ -148,35 +149,4 @@ abstract class Animal {
     public void feed() {
         SaturationLevel = 100;
     }
-
-    // public static void attachAnimal(Zoo zoo) {
-    //     List<Animal> Animals = zoo.getAnimals();
-    //     List<Worker> Workers = zoo.getWorkers();
-    //     Console.Write("Choose animal to attach\n");
-    //     for (int i = 0; i < Animals.Count; i++) {
-    //         Console.Write(
-    //             $"________________\n{i}\nStatus: {Animals[i].Status}\nType: {Animals[i].Type}\nLevel: {Animals[i].SaturationLevel}\n");
-    //     }
-    //
-    //     var toAttachAnim = Int32.Parse(Console.ReadLine());
-    //
-    //     Console.Write("Choose worker to attach animal to\n");
-    //     if (Workers.Count == 0) {
-    //         Console.Write("There arenot any workers\n");
-    //         return;
-    //     }
-    //
-    //     for (int i = 0; i < Workers.Count; i++) {
-    //         string temp = "";
-    //         foreach (var unit in Workers[i].AttachedAnimal) {
-    //             temp += $"{unit}, ";
-    //         }
-    //
-    //         Console.Write(
-    //             $"________________\n{i}\nName: {Workers[i].Name}\nSex: {Workers[i].Sex}\nJob:{Workers[i].Job}\nAttachedAnimal:{temp}\n");
-    //     }
-    //
-    //     var toAttachWork = Int32.Parse(Console.ReadLine());
-    //     Workers[toAttachWork].AttachedAnimal.Add(toAttachAnim);
-    // }
 }
