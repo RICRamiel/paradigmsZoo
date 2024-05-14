@@ -75,6 +75,7 @@ class Visitor : Person {
             foreach (var unit in Animals) {
                 if (unit.getVisibility().Equals(Animal.whereIsAnimal.Visible) &&
                     unit.getStatus().Equals(Animal.status.Hungry)) {
+                    SnackAmount--;
                     unit.feed();
                     Console.Write($"Visitor feeded animal{unit.GetType()} at Aviary index:{AviaryTo}\n");
                     break;

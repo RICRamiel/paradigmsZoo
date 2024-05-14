@@ -8,7 +8,7 @@ class aviary {
     private int AnimalMax = 5;
 
     public aviary() {
-        Food = 100;
+        Food = 5;
     }
 
     public int getAnimalMax() {
@@ -47,6 +47,7 @@ class aviary {
     public void feedAnimals() {
         foreach (var unit in Animals) {
             if (unit.getStatus() == Animal.status.Hungry && Food > 0) {
+                Food--;
                 unit.feed();
             }
         }
