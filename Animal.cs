@@ -50,8 +50,7 @@ abstract class Animal {
         return Visibility;
     }
 
-    public void tickMove() {
-        Random random = new Random();
+    public void tickMove(Random random) {
         Array val = Enum.GetValues(typeof(whereIsAnimal));
         Visibility = (whereIsAnimal)val.GetValue(random.Next(val.Length));
     }

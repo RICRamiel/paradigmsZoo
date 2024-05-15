@@ -23,7 +23,6 @@ using System.Collections.Generic;
 interface Iaviary {
     int getAnimalMax();
     void addAviary(Zoo zoo);
-    void checkOutAnimals();
     void getInfo();
     List<Animal> getAnimals();
     int getFood();
@@ -55,7 +54,7 @@ class aviary : Iaviary {
     public void checkOutAnimals() {
         for (var unit = 0; unit < Animals.Count; unit++) {
             Console.Write(
-                $"\nId:{unit}\nStatus: {Animals[unit].getStatus()}\nType: {Animals[unit].GetType()}\nLevel: {Animals[unit].getSaturation()}\n");
+                $"\nId:{unit}\nStatus: {Animals[unit].getStatus()}\nType: {Animals[unit].GetType()}\nLevel: {Animals[unit].getSaturation()}\nIn aviary:{Animals[unit].getVisibility().ToString()}\n");
         }
     }
 

@@ -72,11 +72,12 @@ class Zoo {
 
     public void updateTick() {
         while (isRunning) {
+            Random random = new Random();
             Timer += 1;
             foreach (var aviar in Aviaries) {
                 foreach (var ani in aviar.getAnimals()) {
                     ani.SaturationDown();
-                    ani.tickMove();
+                    ani.tickMove(random);
                     ani.statusUpdate();
                 }
             }
