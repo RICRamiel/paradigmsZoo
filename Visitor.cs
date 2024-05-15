@@ -67,7 +67,7 @@ class Visitor : Person {
     }
 
     public void feedAnimal(Zoo zoo) {
-        List<aviary> Aviaries = zoo.getAviaries();
+        List<Iaviary> Aviaries = zoo.getAviaries();
         Random random = new Random();
         if (SnackAmount != 0) {
             int AviaryTo = random.Next(Aviaries.Count);

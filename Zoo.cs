@@ -10,14 +10,14 @@ class Zoo {
 
     private static List<Worker> Workers = new List<Worker>();
     private static List<Visitor> Visitors = new List<Visitor>();
-    private static List<aviary> Aviaries = new List<aviary>();
+    private static List<Iaviary> Aviaries = new List<Iaviary>();
 
     public Zoo(string name) {
         Name = name;
         Timer = 0;
-        this.startUp();
+        startUp();
     }
-
+ 
     private void startUp() {
         Random random = new Random();
         for (var count = 0; count < 15; count++) {
@@ -34,7 +34,8 @@ class Zoo {
             }
 
             if (!flag) {
-                aviary.addAviary(this);
+                Iaviary inter = new aviary();
+                inter.addAviary(this);
                 aviaryTo = Aviaries.Count - 1;
             }
 
@@ -160,7 +161,7 @@ class Zoo {
         return Visitors;
     }
 
-    public List<aviary> getAviaries() {
+    public List<Iaviary> getAviaries() {
         return Aviaries;
     }
 }

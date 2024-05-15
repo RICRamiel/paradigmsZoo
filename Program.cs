@@ -9,6 +9,7 @@ namespace paradigm {
             Console.Write("Please, enter Zoo`s name\n");
             Zoo zoo = new Zoo(Console.ReadLine());
             Thread updaterThread = new Thread(zoo.updateTick);
+            Iaviary inter = new aviary();
             updaterThread.Start();
             Console.Write("Type <Help> to check available commands\n");
             while (zoo.isRunnin()) {
@@ -17,8 +18,8 @@ namespace paradigm {
                     case "Help":
                         Console.Write(
                             "\nStop Zoo - to stop running game\nPause Zoo - to pause your zoo\nResume Zoo - to resume your zoo\n" +
-                            "Check workers - show list of workers and their stats\nCheck animals - show list of animals and their stats\nCheck visitors - show list of visitors and their stats\n" +
-                            "Add worker - add new worker to your zoo\nAdd animal - add new animal to your zoo\nAdd visitor - add new visitor to your zoo\n" +
+                            "Check workers - show list of workers and their stats\nCheck aviaries - show list of aviaries, their stats and animals in aviaries with animals`s stats\nCheck visitors - show list of visitors and their stats\n" +
+                            "Add worker - add new worker to your zoo\nAdd animal - add new animal to your zoo\nAdd visitor - add new visitor to your zoo\nAdd aviary - add new aviary to your zoo\n" +
                             "Delete worker - fire up worker from your zoo\nDelete animal - transfer animal from your zoo\nDelete visitor - kick visitor from your zoo\n" +
                             "Edit worker - edit worker's stats\nEdit animal - edit animal's stats\nEdit visitor - edit visitor's stats\n" +
                             "Make Sound\nAttach aviaries\n");
@@ -26,7 +27,7 @@ namespace paradigm {
                     case "Check workers":
                         zoo.checkOutWorkers();
                         break;
-                    case "Check animals":
+                    case "Check aviaries":
                         zoo.getAviariesInfo();
                         break;
                     case "Check visitors":
@@ -80,6 +81,9 @@ namespace paradigm {
                         break;
                     case "Attach aviaries":
                         Worker.attachAviaries(zoo);
+                        break;
+                    case "Add aviary":
+                        inter.addAviary(zoo);
                         break;
                 }
             }

@@ -1,7 +1,39 @@
 using System;
 using System.Collections.Generic;
 
-class aviary {
+// interface Iaviary{
+//     private List<Animal> Animals = new List<Animal>();
+//     private int Food { get; set; }
+//
+//
+//     private int AnimalMax = 5;
+//     public int getAnimalMax();
+//
+//
+//     public static void addAviary(Zoo zoo);
+//     public void checkOutAnimals();
+//     public void getInfo();
+//     public List<Animal> getAnimals();
+//     public int getFood();
+//     public void addFood(int amount);
+//     public void feedAnimals();
+//     public void makeSound();
+// }
+
+interface Iaviary {
+    int getAnimalMax();
+    void addAviary(Zoo zoo);
+    void checkOutAnimals();
+    void getInfo();
+    List<Animal> getAnimals();
+    int getFood();
+    void addFood(int amount);
+    void feedAnimals();
+    void makeSound();
+}
+
+
+class aviary : Iaviary {
     private List<Animal> Animals = new List<Animal>();
     private int Food { get; set; }
 
@@ -15,8 +47,8 @@ class aviary {
         return AnimalMax;
     }
 
-    public static void addAviary(Zoo zoo) {
-        List<aviary> Aviaries = zoo.getAviaries();
+    public void addAviary(Zoo zoo) {
+        List<Iaviary> Aviaries = zoo.getAviaries();
         Aviaries.Add(new aviary());
     }
 

@@ -67,7 +67,7 @@ abstract class Animal {
 
 
     public static void addAnimal(Zoo zoo) {
-        List<aviary> Aviaries = zoo.getAviaries();
+        List<Iaviary> Aviaries = zoo.getAviaries();
         Console.Write(
             $"Choose animal type\nId:{(int)types.Lion} {types.Lion.ToString()}\nId:{(int)types.Elephant} {types.Elephant.ToString()}\nId:{(int)types.Otter} {types.Otter.ToString()}");
         var type = Int32.Parse(Console.ReadLine());
@@ -87,9 +87,8 @@ abstract class Animal {
         }
 
         if (!flag) {
-            Console.Write("There is no suitable aviaries. So creating a new one");
-            aviary.addAviary(zoo);
-            aviaryTo = Aviaries.Count - 1;
+            Console.Write("There is no suitable aviaries. So create a new one");
+            return;
         }
 
         switch (type) {
@@ -107,7 +106,7 @@ abstract class Animal {
 
     public static void deleteAnimal(Zoo zoo) {
         var chosenAv = zoo.chooseAviary();
-        aviary Aviary = zoo.getAviaries()[chosenAv];
+        Iaviary Aviary = zoo.getAviaries()[chosenAv];
         List<Animal> Animals = Aviary.getAnimals();
         for (int i = 0; i < Animals.Count; i++) {
             Console.Write(
@@ -129,7 +128,7 @@ abstract class Animal {
 
     public static void editAnimal(Zoo zoo) {
         var chosenAv = zoo.chooseAviary();
-        aviary Aviary = zoo.getAviaries()[chosenAv];
+        Iaviary Aviary = zoo.getAviaries()[chosenAv];
         List<Animal> Animals = Aviary.getAnimals();
         for (int i = 0; i < Animals.Count; i++) {
             Console.Write(

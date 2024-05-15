@@ -73,7 +73,7 @@ class Worker : Person {
 
     public static void attachAviaries(Zoo zoo) {
         List<Worker> Workers = zoo.getWorkers();
-        List<aviary> Aviaries = zoo.getAviaries();
+        List<Iaviary> Aviaries = zoo.getAviaries();
         foreach (var unit in Workers) {
             unit.AttachedAviary.Clear();
         }
