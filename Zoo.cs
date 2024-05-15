@@ -15,10 +15,10 @@ class Zoo {
     public Zoo(string name) {
         Name = name;
         Timer = 0;
-        startUp();
     }
  
-    private void startUp() {
+    public Iaviary startUp() {
+        Iaviary inter = new aviary();
         Random random = new Random();
         for (var count = 0; count < 15; count++) {
             var type = random.Next(3);
@@ -34,7 +34,7 @@ class Zoo {
             }
 
             if (!flag) {
-                Iaviary inter = new aviary();
+                
                 inter.addAviary(this);
                 aviaryTo = Aviaries.Count - 1;
             }
@@ -53,6 +53,7 @@ class Zoo {
         }
 
         Console.Write("Please create worker and attach aviaries to him\n");
+        return inter;
     }
 
     public int chooseAviary() {

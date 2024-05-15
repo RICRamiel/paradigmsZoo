@@ -9,7 +9,7 @@ namespace paradigm {
             Console.Write("Please, enter Zoo`s name\n");
             Zoo zoo = new Zoo(Console.ReadLine());
             Thread updaterThread = new Thread(zoo.updateTick);
-            Iaviary inter = new aviary();
+            Iaviary inter = zoo.startUp();
             updaterThread.Start();
             Console.Write("Type <Help> to check available commands\n");
             while (zoo.isRunnin()) {
